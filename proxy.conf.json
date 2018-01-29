@@ -1,0 +1,14 @@
+{
+  "/matakuliah/*":{
+    "target": "http://localhost:8080/master",
+    "secure": true
+  },
+  "/jurusan/*":{
+    "target": "http://localhost:8080/master",
+    "secure": true
+  },
+  "/mahasiswa/*":{
+    "target": "http://localhost:8080/master",
+    "secure": true
+  }
+}

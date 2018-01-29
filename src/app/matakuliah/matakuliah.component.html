@@ -1,0 +1,126 @@
+<!--ngx-bootstrap-modal-->
+<ng-template #templateMatakuliah>
+  <div class="modal-header">
+    <h4 *ngIf="!IdMataKuliahToUpdate" class="modal-title pull-left">Tambah Matakuliah</h4>
+    <h4 *ngIf="IdMataKuliahToUpdate" class="modal-title pull-left">Update Matakuliah</h4>
+    <button type="button" class="close pull-right" aria-label="Close"
+    (click)="modalref.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="matakuliahForm" (ngSubmit)="onSubmited()">
+      <div class="form-group">
+        <label class="col-lg-3 control-label">Nama</label>
+        <div class="col-lg-10">
+          <input type="text" class="form-control" formControlName="name" />
+          <!--Validators-->
+          <label *ngIf="matakuliahForm.get('name').invalid && processValidation"
+          [ngClass]="'error'" style="color:crimson">Nama masih kosong</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-lg-3 control-label">Description</label>
+        <div class="col-lg-10">
+          <input type="text" class="form-control" formControlName="description"/>
+          <!--Validators-->
+          <label *ngIf="matakuliahForm.get('description').invalid && processValidation"
+          [ngClass]="'error'" style="color:crimson">Description Masih kosong</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-lg-3 control-label">Jumlah sks</label>
+        <div class="col-lg-10">
+          <input type="number" class="form-control" formControlName="jumlahsks"/>
+          <label *ngIf="matakuliahForm.get('jumlahsks').invalid && processValidation"
+          [ngClass]="'error'" style="color:crimson">Jumlah sks masih kosong</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-lg-3 control-label">Jurusan</label>
+        <div class="col-lg-10">
+        <select class="form-control" formControlName="jurusan">
+          <option [ngValue]="null">Pilih Salah Satu</option>
+          <option *ngFor="let jurusan of Jurusans"
+          [ngValue]="jurusan">
+          {{jurusan.name}}
+        </option>
+        </select>
+        <label *ngIf="matakuliahForm.get('jurusan').invalid && processValidation"
+        [ngClass]="'error'" style="color:crimson">Jurusan Masih kosong</label>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <div class="col-lg-8">
+        <button *ngIf="!IdMataKuliahToUpdate" class="btn btn-primary">
+          <span class="fa fa-save"></span>
+          Save
+        </button>
+        <button *ngIf="IdMataKuliahToUpdate" class="btn btn-primary">
+          <span class="fa fa-pencil-square-o"></span>
+            Update
+        </button>
+        <button class="btn btn-danger" (click)="modalref.hide()">
+          <span class="fa fa-refresh"></span>
+          Cancel
+        </button>
+      </div>
+      </div>
+    </form>
+  </div>
+</ng-template>
+<!--ngx-bootstrap-modal-->
+
+<div class="container">
+  <h3>Data Matakuliah</h3>
+  <button class="btn btn-primary" (click)="openModalMatkul(templateMatakuliah)">
+    <span class="fa fa-plus-circle"></span>
+    Tambah Matakuliah
+  </button>
+  <br/>
+  <br/>
+  <div class="page-header">
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Nama</th>
+          <th>Deskripsi</th>
+          <th>Jumlah Sks</th>
+          <th>Jurusan</th>
+          <th>Opsi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let matakuliah of Matakuliahs; let i = index">
+          <td>{{i+1}}</td>
+          <td>{{matakuliah.name}}</td>
+          <td>{{matakuliah.description}}</td>
+          <td>{{matakuliah.jumlahsks}}</td>
+          <td>{{matakuliah.jurusan.name}}</td>
+          <td>
+            <button class="btn btn-primary"
+            (click)="getIdMatakuliahComponent(matakuliah.idmatakuliah)
+            || openModalMatkul(templateMatakuliah)">
+              <span class="fa fa-pencil-square-o"></span>
+              Edit
+            </button>
+            <button class="btn btn-default"
+            (click)="getDeleteMatakuliahComponent(matakuliah.idmatakuliah)">
+              <span class="fa fa-trash"></span>
+              Hapus
+            </button>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <th>No</th>
+        <th>Nama</th>
+        <th>Deskripsi</th>
+        <th>Jumlah Sks</th>
+        <th>Jurusan</th>
+        <th>Opsi</th>
+      </tfoot>
+    </table>
+  </div>
+</div>

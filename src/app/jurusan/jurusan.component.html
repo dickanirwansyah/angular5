@@ -1,0 +1,100 @@
+<!--ngx-modal-template-->
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Manage Jurusan</h4>
+    <button type="button" class="close pull-right" aria-label="Close"
+    (click)="modalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form class="form-horizontal" (ngSubmit)="onHandlingSubmitComponent()" [formGroup]="jurusanForm">
+      <div *ngIf="IdjurusanToUpdate != null">
+        <label><b>ID Jurusan</b></label>
+        <input type="text" value="{{IdjurusanToUpdate}}"
+        class="form-control" disabled/>
+      </div>
+      <div class="form-group">
+        <label><b>Name</b></label>
+        <input type="text" class="form-control" formControlName="name"
+        name="name" placeholder="Name Jurusan"/>
+        <!--validasi-->
+        <label *ngIf="jurusanForm.get('name').invalid && processValidation"
+         [ngClass]="'error'" style="color:crimson">Name is required</label>
+      </div>
+      <div class="form-group">
+        <label><b>Description</b></label>
+        <textarea class="form-control" formControlName="description"
+         formControlName="description"
+         name="description" placeholder="Description Jurusan"></textarea>
+         <label *ngIf="jurusanForm.get('description').invalid && processValidation"
+         [ngClass]="'error'" style="color:crimson">Description is required</label>
+      </div>
+      <div class="modal-footer">
+        <button *ngIf="!IdjurusanToUpdate" class="btn btn-primary">
+          <span class="fa fa-save"></span>
+          Save
+        </button>
+        <button *ngIf="IdjurusanToUpdate" class="btn btn-primary">
+          <span class="fa fa-pencil"></span>
+          Update
+        </button>
+        <button class="btn btn-danger" (click)="modalRef.hide()">
+          <span class="fa fa-refresh"></span>
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+<!--ngx-modal-template-->
+
+<div class="container">
+  <h3>Data Jurusan</h3>
+  <div class="page-header">
+    <button class="btn btn-primary" (click)="openModal(template)">
+      <span class="fa fa-plus-square"></span>
+      Add Jurusan
+    </button>
+    <br/>
+    <br/>
+  </div>
+  <div class="page-header">
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th>UUID Jurusan</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Opsi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let jurusan of Jurusans; let i = index">
+          <td>{{i+1}}</td>
+          <td>{{jurusan.name}}</td>
+          <td>{{jurusan.description}}</td>
+          <td>
+            <button class="btn btn-primary"
+             (click)="getShowDataForEdit(jurusan.idjurusan) || openModal(template)">
+              <span class="fa fa-pencil"></span>
+              Update
+            </button>
+            <button class="btn btn-danger" (click)="getDeleteJurusan(jurusan.idjurusan)">
+              <span class="fa fa-trash"></span>
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th>UUID Jurusan</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Opsi</th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>

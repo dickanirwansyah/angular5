@@ -1,0 +1,33 @@
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" routerLink="/home">Sistem Akademik</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li routerLinkActive="active">
+            <a class="nav-link" routerLink="/home">Home
+              <span class="sr-only">(current)</span></a>
+          </li>
+          <li routerLinkActive="active">
+            <a class="nav-link" routerLink="data/jurusan">Jurusan</a>
+          </li>
+          <li routerLinkActive="active">
+            <a class="nav-link" routerLink="data/matakuliah">Matakuliah</a>
+          </li>
+          <li routerLinkActive="active">
+            <a class="nav-link" routerLink="data/mahasiswa">Mahasiswa</a>
+          </li>
+          <!--
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+          </li>
+          -->
+        </ul>
+      </div>
+    </nav>
+    <!--CONTENT-->
+    <div class="container">
+        <router-outlet></router-outlet>
+    </div>
